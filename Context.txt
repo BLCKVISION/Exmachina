@@ -1,0 +1,56 @@
+## Escala tipográfica
+
+| Elemento | Desktop | Tablet | Móvil | Peso | Line-height | Letter-spacing |
+|---|---:|---:|---:|---:|---:|---:|
+| Hero display | 120–140 px | 72–96 px | 44–56 px | 600–700 | 0.95–1.05 | -0.04em |
+| Título de sección | 40–56 px | 32–40 px | 28–34 px | 600 | 1.05–1.15 | -0.02em |
+| Título de tarjeta | 22–26 px | 20–22 px | 18–20 px | 600 | 1.2 | -0.01em |
+| Texto intro grande | 20–24 px | 18–20 px | 17–18 px | 400–500 | 1.4 | 0 |
+| Párrafo normal | 16–17 px | 16 px | 15–16 px | 400 | 1.55–1.65 | 0 |
+| Label / eyebrow | 12–13 px | 12 px | 11–12 px | 500–600 | 1.2 | 0.08–0.12em |
+| Botón | 15–16 px | 15 px | 14–15 px | 500–600 | 1 | 0 |
+| Footer / legal | 13–14 px | 13 px | 12–13 px | 400 | 1.4 | 0 |
+
+## Espaciado horizontal
+
+| Contexto | Desktop | Tablet | Móvil |
+|---|---:|---:|---:|
+| Margen exterior de la página | 48–64 px | 32–40 px | 20–24 px |
+| Ancho máximo del contenido | 1280–1360 px | 100% | 100% |
+| Gap entre columnas | 32–48 px | 24–32 px | 16–24 px |
+| Gap entre tarjetas | 24–32 px | 20–24 px | 16–20 px |
+| Padding interno de tarjeta | 32–40 px | 28–32 px | 20–24 px |
+
+## Espaciado vertical
+
+| Contexto | Desktop | Tablet | Móvil |
+|---|---:|---:|---:|
+| Padding arriba/abajo de cada sección | 120–160 px | 88–112 px | 64–80 px |
+| Espacio entre label y título | 16–24 px | 14–18 px | 12–16 px |
+| Espacio entre título y párrafo | 20–32 px | 18–24 px | 16–20 px |
+| Espacio entre texto y CTA | 32–48 px | 28–36 px | 24–32 px |
+| Espacio entre tarjetas / columnas | 32–48 px | 24–32 px | 20–28 px |
+| Espacio entre imagen y texto | 24–40 px | 20–32 px | 16–24 px |
+| Espacio antes del footer | 120–180 px | 88–120 px | 64–88 px |
+
+## Valores por sección
+
+| Sección | Tamaño de fuente principal | Padding vertical | Espaciado interno |
+|---|---:|---:|---:|
+| Hero | 120–140 px | 140–180 px | 40–56 px entre titular y CTA |
+| What We Do | 40–56 px | 120–160 px | 24–32 px entre tarjetas |
+| Valores | 24–32 px | 96–140 px | 24–40 px entre imagen y texto |
+| Technology | 72–120 px | 120–160 px | 32–48 px antes del CTA |
+| How We Work | 20–28 px | 120–160 px | 32–48 px entre pasos |
+| Newsroom | 20–28 px | 96–128 px | 24–32 px entre artículos |
+| CTA final | 96–120 px | 140–200 px | 40–64 px entre titular y botón |
+| Footer | 13–14 px | 80–120 px arriba, 32–48 px abajo | 24–40 px entre columnas |
+
+
+Tipografia: Helvetica Now Display en regular y light
+
+tipografia gris en fondo negro: 626262
+
+
+
+

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 
@@ -87,6 +87,9 @@
               </a>
             </div>
           </div>
+          <div class="menu-overlay__footer-right">
+            <a href="#privacidad" class="menu-overlay__privacy-link">Políticas de Privacidad</a>
+          </div>
         </div>
       </div>
     </div>
@@ -148,15 +151,15 @@
           <div class="approach__right">
             <!-- Paragraph 1 -->
             <p class="approach__paragraph approach__paragraph--1" id="approachP1">
-              <span class="approach__line"><span class="approach__line-inner"><strong class="approach__text-white">Exmachina</strong> <span class="approach__text-gray">representamos tecnologia. Construimos capacidades reales.</span></span></span>
+              <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-white">Exmachina</span> <span class="approach__text-gray">representamos tecnologia. Construimos capacidades reales.</span></span></span>
               <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-gray">Investigamos, diseñamos e implementamos sistemas que convierten</span></span></span>
               <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-gray">lo posible en funcional.</span></span></span>
             </p>
 
             <!-- Paragraph 2 -->
             <p class="approach__paragraph approach__paragraph--2" id="approachP2">
-              <span class="approach__line"><span class="approach__line-inner"><strong class="approach__text-white">Cada Sistema</strong> <span class="approach__text-gray">responde a una razón. Cada desición técnica tiene un propósito.</span></span></span>
-              <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-gray">No construimos para impresionar,</span> <strong class="approach__text-white">Construimos para resolver.</strong></span></span>
+              <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-white">Cada Sistema</span> <span class="approach__text-gray">responde a una razón. Cada desición técnica tiene un propósito.</span></span></span>
+              <span class="approach__line"><span class="approach__line-inner"><span class="approach__text-gray">No construimos para impresionar,</span> <span class="approach__text-white">Construimos para resolver.</span></span></span>
             </p>
           </div>
         </div>
@@ -167,14 +170,16 @@
           <!-- Stat 1: 88 % -->
           <div class="approach__stat-col" data-stat="1">
             <div class="approach__stat-line"></div>
-            <div class="approach__stat-header">
-              <span class="approach__stat-title">TAREAS<br>AUTOMATIZADAS</span>
-            </div>
-            <div class="approach__stat-body">
-              <div class="approach__stat-bar"></div>
-              <div class="approach__stat-number-wrapper">
-                <span class="approach__stat-num" data-target="88">0</span>
-                <span class="approach__stat-unit">%</span>
+            <div class="approach__stat-bar"></div>
+            <div class="approach__stat-content">
+              <div class="approach__stat-header">
+                <span class="approach__stat-title">TAREAS<br>AUTOMATIZADAS</span>
+              </div>
+              <div class="approach__stat-body">
+                <div class="approach__stat-number-wrapper">
+                  <span class="approach__stat-num" data-target="88">0</span>
+                  <span class="approach__stat-unit">%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -182,14 +187,16 @@
           <!-- Stat 2: 42 hrs -->
           <div class="approach__stat-col" data-stat="2">
             <div class="approach__stat-line"></div>
-            <div class="approach__stat-header">
-              <span class="approach__stat-title">AHORRADAS<br>/ SEMANA</span>
-            </div>
-            <div class="approach__stat-body">
-              <div class="approach__stat-bar"></div>
-              <div class="approach__stat-number-wrapper">
-                <span class="approach__stat-num" data-target="42">0</span>
-                <span class="approach__stat-unit">hrs</span>
+            <div class="approach__stat-bar"></div>
+            <div class="approach__stat-content">
+              <div class="approach__stat-header">
+                <span class="approach__stat-title">AHORRADAS<br>/ SEMANA</span>
+              </div>
+              <div class="approach__stat-body">
+                <div class="approach__stat-number-wrapper">
+                  <span class="approach__stat-num" data-target="42">0</span>
+                  <span class="approach__stat-unit">hrs</span>
+                </div>
               </div>
             </div>
           </div>
@@ -197,14 +204,16 @@
           <!-- Stat 3: 71 % -->
           <div class="approach__stat-col" data-stat="3">
             <div class="approach__stat-line"></div>
-            <div class="approach__stat-header">
-              <span class="approach__stat-title">MAYOR<br>RAPIDEZ</span>
-            </div>
-            <div class="approach__stat-body">
-              <div class="approach__stat-bar"></div>
-              <div class="approach__stat-number-wrapper">
-                <span class="approach__stat-num" data-target="71">0</span>
-                <span class="approach__stat-unit">%</span>
+            <div class="approach__stat-bar"></div>
+            <div class="approach__stat-content">
+              <div class="approach__stat-header">
+                <span class="approach__stat-title">MAYOR<br>RAPIDEZ</span>
+              </div>
+              <div class="approach__stat-body">
+                <div class="approach__stat-number-wrapper">
+                  <span class="approach__stat-num" data-target="71">0</span>
+                  <span class="approach__stat-unit">%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -214,7 +223,144 @@
       </div>
     </section>
 
+    <!-- ========== SECTION 3: NUESTROS PROYECTOS ========== -->
+    <section class="projects" id="proyectos">
+      <!-- Section top eyebrow & line -->
+      <div class="projects__header">
+        <span class="projects__eyebrow" id="projectsEyebrow">NUESTROS PROYECTOS</span>
+        <div class="projects__line-wrapper">
+          <div class="projects__line" id="projectsLine"></div>
+        </div>
+      </div>
+
+      <!-- Projects List Container -->
+      <div class="projects__list" id="projectsList">
+
+        <!-- Project 1: ChatBot AI -->
+        <article class="project-card" data-project-id="chatbot-ai" tabindex="0" role="button" aria-label="Ver proyecto ChatBot AI">
+          <div class="project-card__media">
+            <div class="project-card__img-wrap">
+              <img src="img/projects/project-1-original.png" alt="ChatBot AI Project" class="project-card__img" loading="lazy">
+              <!-- Solicitar Auditoria CTA appears on hover -->
+              <a href="https://wa.me/?text=Hola%2C%20quisiera%20solicitar%20una%20auditor%C3%ADa%20para%20ChatBot%20AI%20con%20Exmachina" target="_blank" rel="noopener noreferrer" class="project-card__audit-btn">
+                <span>Solicitar Auditoria</span>
+                <span class="project-card__audit-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Traffic App -->
+        <article class="project-card" data-project-id="traffic-app" tabindex="0" role="button" aria-label="Ver proyecto Traffic App">
+          <div class="project-card__media">
+            <div class="project-card__img-wrap">
+              <img src="img/projects/project-2-original.png" alt="Traffic App Project" class="project-card__img" loading="lazy">
+              <!-- Solicitar Auditoria CTA appears on hover -->
+              <a href="https://wa.me/?text=Hola%2C%20quisiera%20solicitar%20una%20auditor%C3%ADa%20para%20Traffic%20App%20con%20Exmachina" target="_blank" rel="noopener noreferrer" class="project-card__audit-btn">
+                <span>Solicitar Auditoria</span>
+                <span class="project-card__audit-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Corelia App -->
+        <article class="project-card project-card--has-cta" data-project-id="corelia-app" tabindex="0" role="button" aria-label="Ver proyecto Corelia App">
+          <div class="project-card__media">
+            <div class="project-card__img-wrap">
+              <img src="img/projects/project-3-original.png" alt="Corelia App Project" class="project-card__img" loading="lazy">
+              <!-- Solicitar Auditoria CTA appears on hover -->
+              <a href="https://wa.me/?text=Hola%2C%20quisiera%20solicitar%20una%20auditor%C3%ADa%20para%20Corelia%20App%20con%20Exmachina" target="_blank" rel="noopener noreferrer" class="project-card__audit-btn">
+                <span>Solicitar Auditoria</span>
+                <span class="project-card__audit-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Bottom label: VER MÁS PROYECTOS -->
+      <div class="projects__footer">
+        <a href="#proyectos" class="projects__more-link">VER MÁS PROYECTOS</a>
+      </div>
+    </section>
+
   </main>
+
+  <!-- ========== FULLSCREEN PROJECT MODAL (Fixed Scroll-Over Effect) ========== -->
+  <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+
+    <!-- Scrollable container inside modal -->
+    <div class="project-modal__scroll" id="projectModalScroll" data-lenis-prevent>
+      
+      <!-- Fixed Hero Section (100vw, 100vh) -->
+      <section class="project-modal__hero" id="projectModalHero">
+        <img src="img/projects/project-1-original.png" alt="" class="project-modal__hero-img" id="projectModalHeroImg">
+        <div class="project-modal__hero-overlay"></div>
+
+        <div class="project-modal__hero-content">
+          <button class="project-modal__back-btn" id="projectModalBackBtn" aria-label="Volver a proyectos">
+            <span class="project-modal__back-arrow">←</span>
+            <span class="project-modal__back-text">Volver</span>
+          </button>
+          
+          <h1 class="project-modal__hero-title" id="projectModalHeroTitle">ChatBot AI</h1>
+        </div>
+      </section>
+
+      <!-- Sliding Detail Section (slides UP over the fixed hero image) -->
+      <section class="project-modal__detail" id="projectModalDetail">
+        
+        <div class="project-modal__detail-grid">
+          <!-- Left: Gallery / Secondary Image -->
+          <div class="project-modal__gallery">
+            <div class="project-modal__gallery-item">
+              <img src="img/projects/p1-detail.png" alt="" class="project-modal__gallery-img" id="projectModalDetailImg">
+            </div>
+          </div>
+
+          <!-- Right: Project Overview & Specs -->
+          <div class="project-modal__info">
+            <div class="project-modal__info-header">
+              <h2 class="project-modal__info-title" id="projectModalInfoTitle">ChatBot AI</h2>
+              <span class="project-modal__info-year" id="projectModalInfoYear">2025</span>
+            </div>
+
+            <div class="project-modal__overview">
+              <span class="project-modal__overview-label">OVERVIEW</span>
+              <p class="project-modal__overview-text" id="projectModalOverviewText">
+                Arquitectura de agentes autónomos y sistemas conversacionales con memoria persistente, integración de bases de datos vectoriales y ejecución de herramientas en tiempo real para optimizar operaciones críticas.
+              </p>
+            </div>
+
+            <!-- Deliverables list with divider lines -->
+            <div class="project-modal__deliverables" id="projectModalDeliverables">
+              <div class="project-modal__deliverable">
+                <span>SISTEMAS AGÉNTICOS & LLMS</span>
+              </div>
+              <div class="project-modal__deliverable">
+                <span>ARQUITECTURA DE DATOS VECTORIALES</span>
+              </div>
+              <div class="project-modal__deliverable">
+                <span>AUTOMATIZACIÓN DE FLUJOS COMPLEJOS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- See More Section (bottom of modal) -->
+        <div class="project-modal__see-more">
+          <h3 class="project-modal__see-more-title">Ver Más Proyectos</h3>
+          <div class="project-modal__see-more-grid" id="projectModalSeeMoreGrid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
 
   <!-- Custom Circular Cursor (matches reference image) -->
   <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>

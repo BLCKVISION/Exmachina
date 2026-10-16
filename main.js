@@ -35,6 +35,55 @@ gsap.ticker.lagSmoothing(0);
 
 
 // ============================================================
+// 1.1 INTERACTIVE NAVBAR (Hide on scroll down, show on scroll up)
+// ============================================================
+
+(function initInteractiveNavbar() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  // Track landing page scroll with Lenis
+  lenis.on('scroll', (e) => {
+    // If fullscreen menu overlay is open, keep navbar visible
+    if (document.body.classList.contains('menu-open')) {
+      navbar.classList.remove('navbar--hidden');
+      return;
+    }
+
+    const currentScroll = e.scroll;
+    const direction = e.direction; // 1 = down, -1 = up
+
+    if (currentScroll <= 30) {
+      navbar.classList.remove('navbar--hidden');
+    } else if (direction === 1 && currentScroll > 80) {
+      navbar.classList.add('navbar--hidden');
+    } else if (direction === -1) {
+      navbar.classList.remove('navbar--hidden');
+    }
+  });
+
+  // Track modal scroll container when modal is active
+  const modalScroll = document.getElementById('projectModalScroll');
+  if (modalScroll) {
+    let lastModalY = 0;
+    modalScroll.addEventListener('scroll', () => {
+      if (document.body.classList.contains('menu-open')) return;
+      const currentY = modalScroll.scrollTop;
+
+      if (currentY <= 30) {
+        navbar.classList.remove('navbar--hidden');
+      } else if (currentY > lastModalY && currentY > 80) {
+        navbar.classList.add('navbar--hidden');
+      } else if (currentY < lastModalY) {
+        navbar.classList.remove('navbar--hidden');
+      }
+      lastModalY = currentY;
+    }, { passive: true });
+  }
+})();
+
+
+// ============================================================
 // 2. DOT PATTERN HOVER EFFECT (Canvas)
 // ============================================================
 
@@ -377,8 +426,18 @@ gsap.ticker.lagSmoothing(0);
     }
   });
 
-  // Close on link click
-  overlay.querySelectorAll('.menu-overlay__link').forEach((link) => {
+  // Hover across both columns: dim non-hovered links, highlight active
+  const allMenuLinks = overlay.querySelectorAll('.menu-overlay__link');
+  allMenuLinks.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      overlay.classList.add('is-hovering-link');
+      allMenuLinks.forEach(l => l.classList.remove('is-active-hover'));
+      link.classList.add('is-active-hover');
+    });
+    link.addEventListener('mouseleave', () => {
+      link.classList.remove('is-active-hover');
+      overlay.classList.remove('is-hovering-link');
+    });
     link.addEventListener('click', closeMenu);
   });
 
@@ -478,7 +537,7 @@ gsap.ticker.lagSmoothing(0);
 
   // Hover scale effect on interactive elements via delegation
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, input, [role="button"], .navbar__menu-toggle, .hero__btn, .menu-overlay__link, .menu-overlay__social')) {
+    if (e.target.closest('a, button, input, [role="button"], .navbar__menu-toggle, .hero__btn, .menu-overlay__link, .menu-overlay__social, .project-card, .project-modal__see-more-card')) {
       cursor.classList.add('is-hovering');
     } else {
       cursor.classList.remove('is-hovering');
@@ -579,4 +638,379 @@ gsap.ticker.lagSmoothing(0);
       }
     }, colStartTime + 0.4);
   });
+})();
+
+
+// ============================================================
+// 8. SECTION 3: NUESTROS PROYECTOS & FULLSCREEN MODAL
+// ============================================================
+
+(function initProjectsSection() {
+  const section = document.getElementById('proyectos');
+  if (!section) return;
+
+  const eyebrow = document.getElementById('projectsEyebrow');
+  const line = document.getElementById('projectsLine');
+  const cards = section.querySelectorAll('.project-card');
+
+  // Initial states
+  gsap.set(eyebrow, { y: 15, opacity: 0 });
+  gsap.set(line, { width: '0%' });
+  gsap.set(cards, { y: 60, opacity: 0 });
+
+  // GSAP ScrollTrigger for Section 3 Header and Cards
+  const projectsTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 80%',
+      once: true,
+    },
+  });
+
+  // Eyebrow and line animation
+  projectsTL.to(eyebrow, {
+    y: 0,
+    opacity: 1,
+    duration: 0.6,
+    ease: 'power3.out',
+  });
+
+  projectsTL.to(line, {
+    width: '95%',
+    duration: 1.1,
+    ease: 'power3.inOut',
+  }, 0.2);
+
+  // Stagger in cards
+  projectsTL.to(cards, {
+    y: 0,
+    opacity: 1,
+    duration: 0.9,
+    stagger: 0.25,
+    ease: 'power3.out',
+    clearProps: 'transform,opacity',
+  }, 0.4);
+
+
+  // Project Data Dictionary
+  const projectsData = {
+    'chatbot-ai': {
+      title: 'ChatBot AI',
+      year: '2025',
+      heroImg: 'img/projects/project-1-original.png',
+      detailImg: 'img/projects/p1-detail.png',
+      overview: 'Arquitectura de agentes autónomos y sistemas conversacionales con memoria persistente, integración de bases de datos vectoriales y ejecución de herramientas en tiempo real para optimizar operaciones críticas.',
+      deliverables: [
+        'SISTEMAS AGÉNTICOS & LLMS',
+        'ARQUITECTURA DE DATOS VECTORIALES',
+        'AUTOMATIZACIÓN DE FLUJOS COMPLEJOS'
+      ]
+    },
+    'traffic-app': {
+      title: 'Traffic App',
+      year: '2025',
+      heroImg: 'img/projects/project-2-original.png',
+      detailImg: 'img/projects/p2-detail.png',
+      overview: 'Plataforma de inteligencia de movilidad y ruteo dinámico de flotas en tiempo real. Análisis predictivo de tráfico, volumetría de pasajeros y telemetría de transporte público masivo.',
+      deliverables: [
+        'ANÁLISIS PREDICTIVO EN TIEMPO REAL',
+        'TELEMETRÍA & GESTIÓN DE FLOTAS',
+        'DASHBOARD DE ALTO RENDIMIENTO'
+      ]
+    },
+    'corelia-app': {
+      title: 'Corelia App',
+      year: '2026',
+      heroImg: 'img/projects/project-3-original.png',
+      detailImg: 'img/projects/p3-detail.png',
+      overview: 'Suite integral para la administración logística y cadena de suministro de raciones y activos. Control de inventario en tiempo real, trazabilidad de pedidos programados y reportería analítica.',
+      deliverables: [
+        'GESTIÓN LOGÍSTICA & DISTRIBUCIÓN',
+        'CONTROL DE INVENTARIO EN VIVO',
+        'SISTEMA MULTI-PLATAFORMA'
+      ]
+    }
+  };
+
+  // Fullscreen Project Modal Controller with Smooth Physical Image Expansion
+  const modal = document.getElementById('projectModal');
+  const modalScroll = document.getElementById('projectModalScroll');
+  const heroImg = document.getElementById('projectModalHeroImg');
+  const heroTitle = document.getElementById('projectModalHeroTitle');
+  const backBtn = document.getElementById('projectModalBackBtn');
+  const infoTitle = document.getElementById('projectModalInfoTitle');
+  const infoYear = document.getElementById('projectModalInfoYear');
+  const overviewText = document.getElementById('projectModalOverviewText');
+  const detailImg = document.getElementById('projectModalDetailImg');
+  const deliverablesEl = document.getElementById('projectModalDeliverables');
+  const seeMoreGrid = document.getElementById('projectModalSeeMoreGrid');
+  const modalDetail = document.getElementById('projectModalDetail');
+
+  let isModalOpen = false;
+  let activeProjectId = null;
+  let activeCardEl = null;
+
+  function populateModalContent(projectId) {
+    const data = projectsData[projectId];
+    if (!data) return;
+
+    activeProjectId = projectId;
+    heroImg.src = data.heroImg;
+    heroTitle.textContent = data.title;
+    infoTitle.textContent = data.title;
+    infoYear.textContent = data.year;
+    overviewText.textContent = data.overview;
+    detailImg.src = data.detailImg;
+
+    // Populate deliverables
+    deliverablesEl.innerHTML = data.deliverables.map(del => `
+      <div class="project-modal__deliverable">
+        <span>${del}</span>
+      </div>
+    `).join('');
+
+    // Populate "Ver Más Proyectos" with other projects
+    const otherKeys = Object.keys(projectsData).filter(k => k !== projectId);
+    seeMoreGrid.innerHTML = otherKeys.map(k => {
+      const p = projectsData[k];
+      return `
+        <div class="project-modal__see-more-card" data-switch-project="${k}">
+          <img src="${p.heroImg}" alt="${p.title}" loading="lazy">
+          <div class="project-modal__see-more-card-content">
+            <span class="project-modal__see-more-card-title">${p.title}</span>
+            <span class="project-modal__see-more-card-year">${p.year}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Attach switch events on see more cards
+    seeMoreGrid.querySelectorAll('[data-switch-project]').forEach(smCard => {
+      smCard.addEventListener('click', () => {
+        const nextId = smCard.getAttribute('data-switch-project');
+        switchProjectModal(nextId);
+      });
+    });
+  }
+
+  function openProjectModal(projectId, cardEl) {
+    const data = projectsData[projectId];
+    if (!data) return;
+
+    activeCardEl = cardEl;
+    const cardImg = cardEl ? cardEl.querySelector('.project-card__img') : null;
+    const rect = cardImg ? cardImg.getBoundingClientRect() : null;
+
+    // Stop main lenis scroll
+    if (typeof lenis !== 'undefined' && lenis) {
+      lenis.stop();
+    }
+    document.body.classList.add('modal-open');
+
+    // Populate data
+    populateModalContent(projectId);
+
+    // Reset modal scroll to top
+    if (modalScroll) {
+      modalScroll.scrollTop = 0;
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    isModalOpen = true;
+
+    // Smooth physical expansion from clicked card position to fullscreen 100vw x 100vh!
+    if (rect) {
+      gsap.fromTo(heroImg, {
+        position: 'fixed',
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+        borderRadius: 4,
+        zIndex: 350,
+      }, {
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        borderRadius: 0,
+        duration: 0.85,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          gsap.set(heroImg, { clearProps: 'position,top,left,width,height,borderRadius,zIndex' });
+        }
+      });
+    }
+
+    // Smooth reveal of hero title and back button
+    gsap.fromTo([backBtn, heroTitle], {
+      y: 40,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.35,
+      stagger: 0.12,
+      ease: 'power3.out',
+    });
+
+    // Smooth reveal of detail section
+    gsap.fromTo(modalDetail, {
+      y: 60,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.45,
+      ease: 'power3.out',
+    });
+  }
+
+  function switchProjectModal(nextId) {
+    if (!projectsData[nextId]) return;
+
+    // Scroll smoothly to top
+    if (modalScroll) {
+      modalScroll.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    gsap.to([heroImg, heroTitle, modalDetail], {
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        populateModalContent(nextId);
+        activeCardEl = document.querySelector(`.project-card[data-project-id="${nextId}"]`);
+
+        gsap.fromTo(heroImg, {
+          scale: 1.05,
+          opacity: 0,
+        }, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.7,
+          ease: 'power3.out',
+          clearProps: 'scale,opacity',
+        });
+
+        gsap.fromTo([heroTitle, modalDetail], {
+          y: 30,
+          opacity: 0,
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: 0.15,
+          stagger: 0.1,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity',
+        });
+      }
+    });
+  }
+
+  function closeProjectModal() {
+    if (!isModalOpen) return;
+
+    const targetCard = activeCardEl || document.querySelector(`.project-card[data-project-id="${activeProjectId}"]`);
+    const cardImg = targetCard ? targetCard.querySelector('.project-card__img') : null;
+    const rect = cardImg ? cardImg.getBoundingClientRect() : null;
+
+    // Hide textual content first
+    gsap.to([backBtn, heroTitle, modalDetail], {
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power2.out',
+    });
+
+    // Animate hero image back to card rect if visible in viewport
+    if (rect && rect.top < window.innerHeight && rect.bottom > 0) {
+      gsap.fromTo(heroImg, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        borderRadius: 0,
+        zIndex: 350,
+      }, {
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+        borderRadius: 4,
+        duration: 0.7,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          gsap.set(heroImg, { clearProps: 'position,top,left,width,height,borderRadius,zIndex' });
+          document.body.classList.remove('modal-open');
+          isModalOpen = false;
+
+          // Resume main lenis scroll
+          if (typeof lenis !== 'undefined' && lenis) {
+            lenis.start();
+          }
+        }
+      });
+    } else {
+      // Smooth fade out fallback
+      gsap.to(modal, {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          modal.style.opacity = '';
+          document.body.classList.remove('modal-open');
+          isModalOpen = false;
+
+          if (typeof lenis !== 'undefined' && lenis) {
+            lenis.start();
+          }
+        }
+      });
+    }
+  }
+
+  // Card click triggers
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Don't open modal if clicking the CTA button
+      if (e.target.closest('.project-card__audit-btn')) return;
+      const id = card.getAttribute('data-project-id');
+      if (id) {
+        openProjectModal(id, card);
+      }
+    });
+  });
+
+  // Prevent card click when clicking audit button directly
+  section.querySelectorAll('.project-card__audit-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  });
+
+  // Back button and close links
+  if (backBtn) {
+    backBtn.addEventListener('click', closeProjectModal);
+  }
+
+  modal.querySelectorAll('[data-close-modal]').forEach(link => {
+    link.addEventListener('click', closeProjectModal);
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isModalOpen) {
+      closeProjectModal();
+    }
+  });
+
 })();
